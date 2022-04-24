@@ -3,6 +3,7 @@ const { Routes } = require('discord-api-types/v9');
 const { readdirSync } = require('fs');
 const path = require('path');
 require('colors');
+require('dotenv')
 const config = require('./config.json');
 
 const laadSlash = () => {
@@ -12,13 +13,12 @@ readdirSync("./slash/").map(async dir => {
 	commands.push(require(path.join(__dirname, `./slash/${dir}/${cmd}`)))
     })
 })
-const rest = new REST({ version: "9" }).setToken(config.token);
+const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
 
 (async () => {
 	try {
 		console.log('[Discord API] Started refreshing application (/) commands.'.yellow);
 		await rest.put(
-			// if you want to make your slash commands in all guilds use "applicationCommands("CLIENT_ID")"
 			Routes.applicationGuildCommands(config.botID, config.serverID),
 			{ body: commands },
 		);

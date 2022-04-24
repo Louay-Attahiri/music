@@ -34,9 +34,6 @@ module.exports = {
         if (schakel === queue.autoplay) return interaction.reply({ content: `Autoplay is al ${queue.autoplay ? 'ingeschakeld.' : 'uitgeschakeld.'}`, ephemeral: true});
         await queue.toggleAutoplay(queue);
 
-        const embed = new MessageEmbed()
-        .setColor(randomKleur())
-        .setDescription(`Autoplay is succesvol ${queue.autoplay ? 'ingeschakeld.' : 'uitgeschakeld.'}`);
-        return interaction.reply({ embeds: [embed], });
+        return client.scripts.simpelEmbed(`Autoplay is succesvol ${queue.autoplay ? 'ingeschakeld.' : 'uitgeschakeld.'}`, interaction);
     }
 }

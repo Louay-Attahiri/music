@@ -19,11 +19,11 @@ module.exports = {
 
         if (!queue) return interaction.reply({ content: 'Er word momenteel niks afgespeeld.', ephemeral: true })
         try {
-            if (skip >= queue.songs.length) return interaction.reply({ content: `Het maximale aantal nummers dat je kan skippen is **${queue.songs.length}**.`, ephemeral: true })
-            const embed = new MessageEmbed().setDescription('Huidige nummer succesvol geskipt.').setColor(randomKleur())
-            return interaction.reply({ embeds: [embed] });
-
+            if (skip >= queue.songs.length) return interaction.reply({ content: `Het maximale aantal nummers dat je kan skippen is **${queue.songs.length - 1}**.`, ephemeral: true })
+            queue.skip(skip);
+            return client.scripts.simpelEmbed(`Huidige **nummer** succesvol geskipt.`, interaction);
         } catch (e) {
+            console.log(e);
             return interaction.reply({ content: 'Er is een fout opgetreden!' });
         }
     }

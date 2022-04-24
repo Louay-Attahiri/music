@@ -8,8 +8,8 @@ module.exports = {
     run: async (interaction, client) => {
         const queue = client.distube.getQueue(interaction)
         if (!queue) return interaction.reply({ content: 'Er zit momenteel niks in de wachtrij.', ephemeral: true });
+        
         queue.stop()
-        const embed = new MessageEmbed().setDescription(`Wachtrij succesvol gestopt.`).setColor(randomKleur())
-        return interaction.reply({ embeds: [embed] });
+        return client.scripts.simpelEmbed(`Wachtrij succesvol gestopt.`, interaction);
     }
 };

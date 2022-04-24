@@ -88,16 +88,13 @@ module.exports = {
         if (!queue) return interaction.reply({ content: 'Er word momenteel niks afgespeeld.', ephemeral: true });
         if (filter === 'off' && queue.filters?.length) {
             queue.setFilter(false);
-            const embed = new MessageEmbed().setDescription('Filter(s) succesvol uitgeschakeld.').setColor(randomKleur());
-            return interaction.reply({ embeds: [embed] });
+            return client.scripts.simpelEmbed('Filter(s) succesvol uitgeschakeld.', interaction);
         }
         else if (Object.keys(client.distube.filters).includes(filter)) {
             queue.setFilter(filter);
-            const embed = new MessageEmbed().setDescription(`Huidige wachtrij filter(s): \`${queue.filters.join(', ')}\``).setColor(randomKleur())
-            return interaction.reply({ embeds: [embed] });
+            return client.scripts.simpelEmbed(`Huidige wachtrij filter(s): \`${queue.filters.join(', ')}\``, interaction);
         } else {
-            const embed = new MessageEmbed().setDescription(`Er is een fout opgetreden!`).setColor(randomKleur())
-            return interaction.reply({ embeds: [embed] });
+            return interaction.reply({ content: 'Er is een fout opgetreden!' });
         }
     }
 };

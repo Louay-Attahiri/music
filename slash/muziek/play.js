@@ -17,11 +17,8 @@ module.exports = {
 
     const gebruiker = interaction.member;
     const nummer = interaction.options.getString('nummer');
-    
 
-    const embed = new MessageEmbed()
-      .setDescription(`🔍 | **Aan het zoeken...**`).setColor(randomKleur())
-    interaction.reply({ embeds: [embed] });
+    client.scripts.simpelEmbed(`🔍 | **Aan het zoeken...**`, interaction);
 
     client.distube.play(gebruiker.voice.channel, nummer, {
       member: gebruiker,

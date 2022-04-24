@@ -17,8 +17,6 @@ module.exports = {
     run: async (interaction, client) => {
         let seconden = interaction.options.getString('tijd');
         seconden = parse(seconden)/ 1000;
-        
-        
         const queue = client.distube.getQueue(interaction);
 
         if (!queue) return interaction.reply({ content: 'Er word momenteel niks afgespeeld.', ephemeral: true });
@@ -26,11 +24,7 @@ module.exports = {
         const tijd = new Date(seconden * 1000).toISOString().slice(14, 19);
 
         queue.seek(seconden);
-        const embed = new MessageEmbed()
-            .setDescription(`Muziek word nu afgespeeld vanaf **${tijd}**.`)
-            .setColor(randomKleur())
-
-        interaction.reply({ embeds: [embed] })
+        return client.scripts.simpelEmbed(`Muziek word nu afgespeeld vanaf **${tijd}**.`, interaction);
 
         
     }

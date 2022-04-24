@@ -60,10 +60,6 @@ module.exports = {
                 type = 'ingeschakeld'
                 break;
         }
-
-        const embed = new MessageEmbed()
-            .setColor(randomKleur())
-            .setDescription(`Repeat is succesvol **${type}**.`);
-        return interaction.reply({ embeds: [embed], });
+        return client.scripts.simpelEmbed(`Repeat is succesvol **${type}**.`, interaction);
     }
 }

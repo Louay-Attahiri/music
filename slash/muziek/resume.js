@@ -4,19 +4,15 @@ const { randomKleur } = require("../../scripts/randomKleur");
 
 module.exports = {
     name: 'resume',
-    description: 'Hetvat het huidige nummer',
+    description: 'Hervat het huidige nummer',
     run: async(interaction, client) => {
         const queue = client.distube.getQueue(interaction)
-        if (!queue) {
-            return interaction.reply({ content: 'Er word momenteel niks afgespeeld.', ephemeral: true });
-        } else {
+        if (!queue) return interaction.reply({ content: 'Er word momenteel niks afgespeeld.', ephemeral: true });
+        else {
             if (queue.paused) {
                 queue.resume();
-                const embed = new MessageEmbed().setDescription('Huidige nummer succesvol hervat.').setColor(randomKleur())
-                return interaction.reply({ embeds: [embed] });
-            } else {
-                return interaction.reply({ content: 'Huidige nummer word al afgespeeld.', ephemeral: true });
-            }
+                return client.scripts.simpelEmbed(`Huidige nummer succesvol hervat.`, interaction);
+            } else return interaction.reply({ content: 'Huidige nummer word al afgespeeld.', ephemeral: true });
         }
     }
 };

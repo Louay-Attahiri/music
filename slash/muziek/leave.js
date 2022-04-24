@@ -8,14 +8,9 @@ module.exports = {
     run: async (interaction, client) => {
         if (!interaction.guild.me.voice.channel) return interaction.reply({ content: 'Ik ben niet verbonden met een spraakkanaal.', ephemeral: true })
         const voiceChannel = interaction.guild.me.voice.channel;
-
-
         client.distube.voices.leave(voiceChannel);
 
-        const embed = new MessageEmbed()
-            .setDescription(`Ik ben het kanaal ${voiceChannel} geleaved.`)
-            .setColor(randomKleur())
-
+        client.scripts.simpelEmbed(`Ik ben het kanaal ${voiceChannel} geleaved.`, interaction);
         interaction.reply({ embeds: [embed] });
 
     }

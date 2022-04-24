@@ -13,7 +13,9 @@ module.exports = async (client, interaction) => {
 		if (!client.slash.has(interaction.commandName)) return;
 		if (!interaction.guild) return;
 		if (!interaction.member.voice.channel) return interaction.reply({ content: "Je moet in een spraakkanaal zitten om dit commando te kunnen gebruiken!", ephemeral: true });
-		if(interaction.guild.me.voice.channel.name != interaction.member.voice.channel.name) return interaction.reply({ content: "Je moet in hetzelfde spraakkanaal als mij zitten om dit commando te kunnen gebruiken!", ephemeral: true });
+		if(!interaction.guild.me.voice.channel);
+		else if(interaction.guild.me.voice.channel.name != interaction.member.voice.channel.name) return interaction.reply({ content: "Je moet in hetzelfde spraakkanaal als mij zitten om dit commando te kunnen gebruiken!", ephemeral: true }); 
+		
 
 		client.distube.interactie = interaction;
 		const command = client.slash.get(interaction.commandName)
